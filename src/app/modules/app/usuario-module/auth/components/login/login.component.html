@@ -1,0 +1,48 @@
+<div class="w-full h-full flex justify-center items-center bg-color-primary-dark">
+  <app-custom-loading *ngIf="isLoading" [class]="'text-color-loading'"></app-custom-loading>
+
+  <div *ngIf="!isLoading" class="m-8 w-full md:w-2/4 lg:w-2/6 xl:w-1/4 md:m-0 h-max flex flex-col shadow bg-color-white rounded-lg p-4">
+    <div class="flex flex-col items-center">
+      <a href="#/shared" class="text-center">
+        <img class="w-52" src="logo_azul.png" alt="logo">
+      </a>
+      <!--
+      <app-custom-title [id]="'id_sub_title_bienvenido'" [label]="'Bienvenido!!!'"
+        [classMain]="'text-color-text mt-4 w-full text-left uppercase'"></app-custom-title>
+        -->
+    </div>
+
+    <div class="flex flex-col gap-2 p-4">
+      <form class="flex flex-col gap-4">
+        <app-custom-input [id]="'id_input_usuario'" [label]="'Usuario'" [type]="'text'" [autocomplete]="''" [icon]="''" [control]="formLogin.controls.usuario" [classMain]="''"
+          [classSpan]="'text-color-primary-dark'" [classIcon]="''" [classInput]="''"></app-custom-input>
+
+        <app-custom-input [id]="'id_input_password'" [label]="'Contraseña'" [type]="'password'" [autocomplete]="''" [icon]="''" [control]="formLogin.controls.password" [classMain]="''"
+          [classSpan]="'text-color-primary-dark'" [classIcon]="''" [classInput]="''"></app-custom-input>
+
+        <app-custom-button [id]="'id_button_login'" [label]="'Ingresar'" [type]="'accept'" [icon]="''"
+          [classMain]="'w-full'" [classSpan]="''" [valid]="true" (click)="onClickLogin()">
+        </app-custom-button>
+      </form>
+
+
+      <a [routerLink]="['/forgot']"
+        class="cursor-pointer w-full font-normal leading-6 text-right text-sm text-color-primary-dark hover:text-color-primary">
+        ¿Has olvidado tu contraseña?
+      </a>
+
+      <br>
+
+      <app-custom-button [id]="'id_button_registro'" [label]="'Registrarse'" [type]="'cancel'" [icon]="''"
+        [classMain]="'w-full'" [classSpan]="''" [valid]="true" (click)="onClickRegistrarse()">
+      </app-custom-button>
+    </div>
+  </div>
+  <!--
+    <app-agregar-usuario *ngIf="!isLoading && !showCode && showUsuarioAlert" [type]="'nuevo'" [title]="'Nuevo Usuario'"
+        [usuario]="''" [rol]="rolUsuarioAlert" [autorizacion]="autorizacionUsuarioAlert" (response)="onReciveResponseUsuarioAlert($event)">
+    </app-agregar-usuario>
+
+    <app-custom-code *ngIf="!isLoading && showCode" (response)="codeReceiver($event)"></app-custom-code>
+    -->
+</div>

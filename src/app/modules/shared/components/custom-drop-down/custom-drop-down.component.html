@@ -1,0 +1,7 @@
+<div class="rounded-sm border" [class]="classMain" [ngClass]="_classMain">
+    <select [id]="id" [formControl]="control" (blur)="onBlur()" (focus)="onFocus()"
+        class="h-10 py-2 px-2 w-full bg-color-white focus:outline-none focus:ring-1 focus:ring-color-primary peer text-sm" [ngClass]="_classMain">
+        <option value="" selected>{{ label }}</option>
+        <option *ngFor="let item of data" value="{{ item.value }}">{{ item.data }}</option>
+    </select>
+</div>

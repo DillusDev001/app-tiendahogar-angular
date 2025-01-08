@@ -1,0 +1,29 @@
+<div class="relative flex flex-col gap-1" [class]="classMain">
+    <label *ngIf="label !== ''" [for]="id" class="text-sm text-color-gray" [ngClass]="_classLabel">{{ label }}</label>
+
+    <div class="flex border rounded-sm p-1 gap-2" [ngClass]="_classMain">
+        <span *ngIf="icon != ''" class="p-1" [class]="classSpan" [ngClass]="_classIcon">
+            <i [class]="icon"></i>
+        </span>
+
+        <input [type]="type" [id]="id" (blur)="onBlur()" (focus)="onFocus()" [formControl]="control"
+            [autocomplete]="autocomplete" [ngClass]="_classInput"
+            class="text-sm w-full h-8 bg-color-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer"
+            [class]="classInput" placeholder="" [placeholder]="placeholder" (input)="onTextChange($event)" />
+
+        <button (click)="showOrHiddenPassword()" *ngIf="isPassword"
+            class="p-1 text-color-icon-1 rounded-sm focus:outline-none focus:ring-1 focus:ring-color-primary peer"
+            [class]="classSpan" [ngClass]="_classIcon">
+            <i *ngIf="isHidden" class="fa-solid fa-eye fa-lg"></i>
+            <i *ngIf="!isHidden" class="fa-solid fa-eye-slash fa-lg"></i>
+        </button>
+    </div>
+</div>
+
+<ul *ngIf="suggestions.length"
+    class="absolute bg-color-white border border-gray-300 w-48 mt-1 max-h-40 overflow-y-auto z-10">
+    <li *ngFor="let suggestion of suggestions" class="text-color-text p-2 cursor-pointer hover:bg-color-gray-lite"
+        (click)="selectSuggestion(suggestion)">
+        {{ suggestion }}
+    </li>
+</ul>

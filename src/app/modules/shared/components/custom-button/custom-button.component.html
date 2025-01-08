@@ -1,0 +1,7 @@
+<button [id]="id" class="flex gap-2 items-center h-10 p-2 border rounded-sm shadow-md appearance-none focus:outline-none focus:ring-1 focus:ring-color-primary peer" type="button"
+    [class]="classMain" [ngClass]="getMainClass(type)">
+    <span *ngIf="icon != ''" [class]="classSpan" [ngClass]="getClassIcon(type)">
+        <i [class]="icon"></i>
+    </span>
+    <p class="w-full text-sm uppercase">{{ label }}</p>
+</button>

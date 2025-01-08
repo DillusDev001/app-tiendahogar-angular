@@ -1,0 +1,15 @@
+<div class="relative" [class]="classMain" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
+    <app-custom-icon (click)="toggleDropdown()"
+        [icon]="'fa-solid fa-ellipsis-vertical fa-xl'"
+        [class]="'cursor-pointer'" [ngClass]="classIcon"></app-custom-icon>
+    <!-- Dropdown -->
+    <div *ngIf="isDropdownOpen"
+        class="absolute right-0 w-48 bg-white border rounded shadow-lg z-10 bg-color-white font-normal">
+        <ul class="text-gray-700">
+            <li *ngFor="let item of data, index as i">
+                <button class="block px-4 py-2 w-full text-left hover:bg-color-gray-lite"
+                    (click)="onClickItemMenu(i)">{{item.data}}</button>
+            </li>
+        </ul>
+    </div>
+</div>

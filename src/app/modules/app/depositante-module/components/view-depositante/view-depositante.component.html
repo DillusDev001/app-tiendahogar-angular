@@ -1,0 +1,54 @@
+<div
+    class="flex overflow-auto absolute top-0 right-0 left-0 justify-center items-center w-full h-full bg-color-gray-lite bg-opacity-40 backdrop-filter backdrop-blur-sm z-20 p-4">
+
+    <app-custom-loading class="w-full h-full" *ngIf="isLoading"></app-custom-loading>
+
+    <div *ngIf="!isLoading" class="flex flex-col shadow-lg overflow-auto gap-4 bg-color-white lg:w-4/5 max-h-full p-4">
+        <app-custom-title [id]="'id_title_'" [label]="titleView"
+            [classMain]="'w-full text-center uppercase text-color-text '"></app-custom-title>
+
+        <fieldset class="border border-color-gray rounded-sm p-2 cursor-pointer lg:cursor-default">
+            <legend class="px-2 text-lg text-color-text font-medium uppercase" (click)="tooglePersona()">Datos Personales</legend>
+            <app-view-persona [type]="type" [ci]="ci" [class.hidden]="isCollapsedPersona && isSmallScreen"
+                [class.block]="!isCollapsedPersona || !isSmallScreen" (responseCI)="onResponseCI($event)"></app-view-persona>
+        </fieldset>
+
+
+
+        <fieldset class="border border-color-gray rounded-sm p-2 cursor-pointer lg:cursor-default">
+            <legend class="px-2 text-lg text-color-text font-medium uppercase" (click)="toogleCuentaBancario()">Datos Bancarios</legend>
+            <app-view-cuenta-bancaria [type]="type" [ci]="ci" [class.hidden]="isCollapsedCuentaBancaria && isSmallScreen"
+                [class.block]="!isCollapsedCuentaBancaria || !isSmallScreen"></app-view-cuenta-bancaria>
+        </fieldset>
+
+
+
+        <fieldset class="border border-color-gray rounded-sm p-2 cursor-pointer lg:cursor-default">
+            <legend class="px-2 text-lg text-color-text font-medium uppercase" (click)="toogleBeneficiario()">Datos Beneficiario</legend>
+            <app-view-beneficiario [type]="type" [ci]="ci" [class.hidden]="isCollapsedBeneficiario && isSmallScreen"
+                [class.block]="!isCollapsedBeneficiario || !isSmallScreen"></app-view-beneficiario>
+        </fieldset>
+
+
+
+        <fieldset class="border border-color-gray rounded-sm p-2 cursor-pointer lg:cursor-default">
+            <legend class="px-2 text-lg text-color-text font-medium uppercase" (click)="toogleContacto()">Datos de Contacto</legend>
+            <app-view-contacto [type]="type" [ci]="ci" [class.hidden]="isCollapsedContacto && isSmallScreen"
+                [class.block]="!isCollapsedContacto || !isSmallScreen"></app-view-contacto>
+        </fieldset>
+
+
+
+        <div class="flex w-full gap-4 justify-center">
+            <app-custom-button class="w-60" [id]="'id_button_agregar'" [label]="'Agregar'" [type]="'accept'"
+                [icon]="''" [classMain]="'w-full'" [classSpan]="'text-color-primary-dark'"
+                [valid]="formBusqueda.valid" (click)="onClickAceptar()">
+            </app-custom-button>
+
+            <app-custom-button class="w-60" [id]="'id_button_cancelar'" [label]="'Cancel'" [type]="'cancel'"
+                [icon]="''" [classMain]="'w-full'" [classSpan]="'text-color-primary-dark'"
+                [valid]="true" (click)="onClickCancel()">
+            </app-custom-button>
+        </div>
+    </div>
+</div>

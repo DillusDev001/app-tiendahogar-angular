@@ -1,0 +1,15 @@
+<div class="flex flex-col w-max h-12 items-center justify-center border-x border-t border-primary-400 rounded-t-md"
+    [class]="classMain" [ngClass]="selected == label ? _classMainSelected : _classMainNotSelected">
+
+    <div class="flex gap-2 w-full h-max px-3 py-1 items-center justify-center ">
+        <span *ngIf="icon != ''" class="p-1"
+            [ngClass]="selected == label ? _classSpanSelected : _classSpanNotSelected ">
+            <i [class]="icon"></i>
+        </span>
+        <p class="font-medium text-lg grow"
+            [ngClass]="selected == label ? _classParraSelected : _classParraNotSelected ">
+            {{ label }}
+        </p>
+    </div>
+
+</div>

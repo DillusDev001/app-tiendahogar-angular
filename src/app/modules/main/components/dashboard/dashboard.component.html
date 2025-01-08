@@ -1,0 +1,128 @@
+<div class="flex flex-col w-full h-full">
+    <!--  -->
+    <div *ngIf="open"
+        class="duration-100 z-10 fixed top-0 left-0 bg-primary-200 bg-opacity-60 w-full h-full backdrop-filter backdrop-blur-sm"
+        (click)="onClickSideBar(false)">
+    </div>
+
+    <!-- Dashboard -->
+    <div class="flex w-screen h-full">
+
+        <!-- Menu -->
+        <nav class="background-div z-50 top:0 fixed top-0 bottom-0 duration-300 w-max h-full lg:left-0 lg:my-0 lg:w-80 lg:relative p-0 lg:p-4 bg-color-white"
+            [ngClass]="{ 'left-0'  : open == true, 'left-[-330px]' : open == false }">
+
+            <div class="flex flex-col h-full divide-y divide-color-gray bg-color-primary bg-opacity-10 rounded-lg">
+
+                <!-- Profile -->
+                <div class="flex flex-col items-center py-2">
+                    <img class="w-20" src="logo_azul.png" alt="">
+
+                    <div class="h-2"></div>
+
+                    <div class="flex flex-col pt-4">
+                        <p class="text-base text-color-primary-dark font-semibold text-center">{{
+                            userLogeado.persona.nombres }} {{ userLogeado.persona.apellidos }}</p>
+                        <p class="text-xs text-color-primary-dark text-center">{{ userLogeado.rol }}</p>
+                    </div>
+
+                    <div class="py-1 text-color-text underline cursor-pointer text-center font-light text-xs"
+                        (click)="onClickCerrarSesion()">
+                        <a>Cerrar Sesión</a>
+                    </div>
+                </div>
+
+                <!-- Menu -->
+                <div class="flex flex-col grow overflow-auto divide-y divide-color-gray">
+
+                    <div class="flex flex-col py-4">
+
+                        <app-custom-menu-button class="mb-2" [id]="'id_menu_inicio'" [label]="'Inicio'"
+                            [icon]="'fa-solid fa-house fa-xl'" [classMain]="'cursor-pointer'" [classSpan]="''"
+                            [selected]="menuSelected" [link]="'/index/inicio'"
+                            (click)="onClickSetMenuSelected('Inicio')">
+                        </app-custom-menu-button>
+
+                        <app-custom-menu-button class="mb-2" [id]="'id_menu_depositante'" [label]="'Depositantes'"
+                            [icon]="'fa-solid fa-hand-holding-dollar fa-xl'" [classMain]="''" [classSpan]="''"
+                            [selected]="menuSelected" [link]="'/index/depositantes'"
+                            (click)="onClickSetMenuSelected('Depositantes')">
+                        </app-custom-menu-button>
+
+                        <app-custom-menu-button class="mb-2" [id]="'id_menu_contratos'" [label]="'Contratos'"
+                            [icon]="'fa-solid fa-file-contract fa-xl'" [classMain]="''" [classSpan]="''"
+                            [selected]="menuSelected" [link]="'/index/contratos'"
+                            (click)="onClickSetMenuSelected('Contratos')">
+                        </app-custom-menu-button>
+
+                        <app-custom-menu-button class="" [id]="'id_menu_asesores'" [label]="'Asesores'"
+                            [icon]="'fa-solid fa-people-group fa-xl'" [classMain]="''" [classSpan]="''"
+                            [selected]="menuSelected" [link]="'/index/asesores'"
+                            (click)="onClickSetMenuSelected('Asesores')">
+                        </app-custom-menu-button>
+
+                    </div>
+
+                    <div class="flex flex-col gap-2 py-4">
+                        <app-custom-menu-button class="" [id]="'id_menu_usuario'" [label]="'Usuarios'"
+                            [icon]="'fa-solid fa-users fa-xl'" [classMain]="''" [classSpan]="''"
+                            [selected]="menuSelected" [link]="'/index/usuarios'"
+                            (click)="onClickSetMenuSelected('Usuarios')">
+                        </app-custom-menu-button>
+                    </div>
+
+                    <div class="flex flex-col gap-2 py-4">
+                        <app-custom-menu-button class="" [id]="'id_menu_mantenimiento'" [label]="'Mantenimiento'"
+                            [icon]="'fa-solid fa-screwdriver-wrench fa-xl'" [classMain]="''" [classSpan]="''"
+                            [selected]="menuSelected" [link]="'/index/mantenimiento'"
+                            (click)="onClickSetMenuSelected('Mantenimiento')">
+                        </app-custom-menu-button>
+                    </div>
+
+                    <div class="flex flex-col gap-2 py-4">
+                        <app-custom-menu-button class="" [id]="'id_menu_riesgo'" [label]="'Riesgo'"
+                            [icon]="'fa-solid fa-triangle-exclamation fa-xl'" [classMain]="''" [classSpan]="''"
+                            [selected]="menuSelected" [link]="'/index/riesgo'"
+                            (click)="onClickSetMenuSelected('Riesgo')">
+                        </app-custom-menu-button>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="py-2 flex flex-col items-center">
+                    <img class="w-24 rounded-full fill-color-icon-1" src="logo-elohim.svg" alt="">
+                    <p class="text-xs text-color-primary-dark text-center font-medium">© {{ currentYear }} Elohim. Todos los derechos reservados
+                    </p>
+                </div>
+
+            </div>
+
+        </nav>
+
+        <!-- Header/Holder -->
+        <div class="flex flex-col w-full h-full overflow-auto">
+
+            <header
+                class="lg:hidden flex items-center p-5 shadow-lg bg-white w-full h-16 border-b border-primary-200 bg-color-red">
+
+                <!-- menu burguer -->
+                <span class="p-2 text-color-primary-dark cursor-pointer mr-2" (click)="onClickSideBar(true)">
+                    <i class="fa-solid fa-bars fa-xl"></i>
+                </span>
+
+                <!-- Title -->
+                <p class="font-semibold text-xl text-color-primary-dark w-max flex-grow">{{ title }}</p>
+
+            </header>
+
+            <!-- holder -->
+            <div class="relative w-full h-full overflow-auto">
+                <router-outlet></router-outlet>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

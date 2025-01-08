@@ -1,0 +1,7 @@
+<div *ngIf="notification?.message" class="fixed p-3 right-2 top-2 rounded-lg shadow-lg z-50"
+  [ngClass]="getNotificationType(notification!.type)">
+  <div class="flex items-center gap-2 text-color-white">
+    <i [ngClass]="getNotificationIcon(notification!.type)"></i>
+    <p class="text-sm">{{ notification!.message }}</p>
+  </div>
+</div>

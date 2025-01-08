@@ -1,0 +1,118 @@
+<div
+    class="relative flex flex-col justify-center shadow-lg overflow-auto gap-4 bg-color-white w-full h-full py-4 pr-4 items-center">
+    <app-custom-loading *ngIf="isLoading"></app-custom-loading>
+
+    <!-- Botones Busqueda -->
+    <div *ngIf="!isLoading" class="flex flex-col sm:flex-row gap-2 w-full md:w-max h-max items-center">
+        <!-- Botones y buscador -->
+        <form [formGroup]="formBusqueda"
+            class="flex flex-col md:flex-row gap-2 w-full h-max border rounded-sm border-color-secundary p-2 shadow-lg bg-color-white">
+
+            <app-custom-drop-down class="w-full md:w-max" [id]="'id_drop_down_busqueda'" [label]="'Búsqueda...'"
+                [control]="formBusqueda.controls.busqueda" [classMain]="''"
+                [data]="dataBusquedaUsuario"></app-custom-drop-down>
+
+            <app-custom-input class="w-full md:w-80" [id]="'id_input_value'" [label]="''" [placeholder]="'Busqueda...'"
+                [type]="'text'" [autocomplete]="''" [icon]="''" [control]="formBusqueda.controls.value"
+                [classMain]="'bg-bg-color-white'" [classSpan]="''" [classIcon]="''"
+                [classInput]="''"></app-custom-input>
+
+            <app-custom-button [id]="'id_button_buscar'" [label]="'Buscar'" [type]="'accept'" [icon]="''"
+                [classMain]="'w-full'" [classSpan]="'text-color-primary-dark'" [valid]="formBusqueda.valid">
+            </app-custom-button>
+
+        </form>
+
+        <!-- Boton Agregar -->
+        <div class="flex flex-col flex-grow md:flex-row gap-2 items-end justify-center w-full">
+            <app-custom-button class="w-full" [id]="'id_button_agregar'" [label]="'Agregar Contrato'" [type]="'accept'"
+                [icon]="''" [classMain]="'w-full'" [classSpan]="'text-color-primary-dark'" [valid]="true">
+            </app-custom-button>
+        </div>
+
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="!isLoading" class="flex flex-col gap-4 w-full h-full overflow-auto shadow-lg">
+        <!-- Table y Nav -->
+        <div class="overflow-auto border rounded-sm grow border-color-gray-lite">
+            <table class="w-max md:w-full text-sm text-left rtl:text-right  table-fixed md:table-auto">
+                <thead class="text-sm text-color-white  uppercase bg-color-secundary bg-opacity-80">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-center w-24">#</th>
+
+                        <th scope="col" class="px-6 py-3 text-center">Contrato</th>
+
+                        <th scope="col" class="px-6 py-3 text-center">Representante</th>
+
+                        <th scope="col" class="px-6 py-3 text-center">Tipo</th>
+
+                        <th scope="col" class="px-6 py-3 text-center w-44">Reinversión</th>
+
+                        <th scope="col" class="px-6 py-3 text-center">Asesor</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!--
+                    <ng-container *ngFor="let item of dataProductos; index as i">
+                        <tr *ngIf="item.estado === 1 || (item.estado === 0 && (userLogeado.rol === 'Developer' || userLogeado.rol === 'Administrador'))"
+                            [ngClass]="{'bg-red-50 text-red-800': item.estado === 0, 'bg-primary-50' : i % 2 !== 0 }"
+                            class="text-primary-800 bg-white border-b">
+                            <th scope="col" class="px-6 py-3">{{ i + 1 }}</th>
+
+                            <th scope="col" class="px-6 py-3">{{ item.cod_producto }}</th>
+
+                            <th scope="col" class="px-6 py-3">{{ item.categoria }}</th>
+
+                            <th scope="col" class="px-6 py-3">{{ item.talla }}</th>
+
+                            <th scope="col" class="px-6 py-3">{{ item.color }}</th>
+
+                            <th scope="col" class="px-6 py-3">{{ item.precio_unitario | currency:'BOB':'Bs. '}}</th>
+
+                            <th scope="col" class="px-6 py-3">{{ item.precio_mayor | currency:'BOB':'Bs. '}}</th>
+
+                            <th scope="col" class="px-6 py-3">
+                                <button (click)="onClickCodeBar(i)"><i class="fa-solid fa-barcode fa-lg"></i></button>
+                            </th>
+
+                            <th scope="col" class="px-6 py-3">
+                                <app-custom-dot-menu [data]="item.estado === 1 ? dataSimpleMenu_0 : dataSimpleMenu_1"
+                                    [class]="''"
+                                    (response)="onReciveResponseSimpleMenu($event, i)"></app-custom-dot-menu>
+                            </th>
+                        </tr>
+                    </ng-container>
+                    -->
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <!-- Paginacion -->
+    <nav *ngIf="!isLoading && paginationArray.length > 0"
+        class="flex items-center flex-column flex-wrap h-max md:flex-row justify-between" aria-label="Table navigation">
+        <div class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+            <a [ngClass]="{ 'cursor-pointer hover:bg-color-secundary hover:bg-opacity-30' : posPaginacion > 1 }"
+                (click)="anteriorPaginacion()"
+                class="flex items-center justify-center px-3 h-8 leading-tight text-color-text bg-color-white border border-color-gray rounded-s-lg">Anterior</a>
+
+            <ul class="inline-flex" *ngFor="let n of paginationArray">
+                <li>
+                    <a [ngClass]="{ 'text-dark-600 bg-color-secundary bg-opacity-30'  : n == posPaginacion, 'text-dark-500 bg-white cursor-pointer' : n != posPaginacion }"
+                        class="flex items-center text-color-text justify-center px-3 h-8 border border-color-gray hover:bg-color-secundary hover:bg-opacity-30"
+                        (click)="numberPaginacion(n)">{{
+                        n }}</a>
+                </li>
+            </ul>
+
+            <a [ngClass]="{ 'cursor-pointer hover:bg-color-secundary hover:bg-opacity-30' : posPaginacion < paginationArray.length }"
+                (click)="siguientePaginacion()"
+                class="flex items-center justify-center px-3 h-8 leading-tight text-color-text bg-color-white border border-color-gray rounded-e-lg">Siguiente</a>
+        </div>
+    </nav>
+
+</div>

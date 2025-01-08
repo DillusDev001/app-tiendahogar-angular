@@ -1,0 +1,38 @@
+<div class="w-full h-full flex flex-col lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-4 items-end">
+
+    <!-- NOMBRE BENEFICIARIO -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">NOMBRE BENEFICIARIO
+        </p>
+        <div class="flex gap-2">
+            <app-custom-input class="w-full" [id]="'id_input_celular'" [label]="''"
+                [placeholder]="'Nombre Beneficiario'" [type]="'text'" [autocomplete]="''" [icon]="''"
+                [control]="formBeneficiario.controls.nombre_beneficiario" [classMain]="''"
+                [classSpan]="'text-color-primary-dark'" [classIcon]="''" [classInput]="''"></app-custom-input>
+        </div>
+    </div>
+
+    <!-- CELULAR BENEFICIARIO -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">CELULAR BENEFICIARIO
+        </p>
+        <div class="flex gap-2">
+            <app-custom-input class="w-full" [id]="'id_input_celular'" [label]="''"
+                [placeholder]="'Celular / Teléfono Beneficiario'" [type]="'text'" [autocomplete]="''" [icon]="''"
+                [control]="formBeneficiario.controls.celular_beneficiario" [classMain]="''"
+                [classSpan]="'text-color-primary-dark'" [classIcon]="''" [classInput]="''"></app-custom-input>
+        </div>
+    </div>
+
+    <!-- CEDULA DE IDENTIDAD BENEFICIARIO -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">CEDULA DE IDENTIDAD
+            BENEFICIARIO</p>
+        <div class="flex gap-2">
+            <app-custom-input class="w-full" [id]="'id_input_ci'" [label]="''"
+                [placeholder]="'Cédula de Identidad Beneficiario'" [type]="'text'" [autocomplete]="''" [icon]="''"
+                [control]="formBeneficiario.controls.ci_beneficiario" [classMain]="''"
+                [classSpan]="'text-color-primary-dark'" [classIcon]="''" [classInput]="''"></app-custom-input>
+        </div>
+    </div>
+</div>

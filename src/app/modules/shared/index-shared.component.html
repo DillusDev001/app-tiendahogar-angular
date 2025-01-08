@@ -1,0 +1,165 @@
+<div class="flex w-full justify-center h-screen">
+  <form class="grid grid-cols-3 w-full gap-4 p-4">
+
+    <div class="flex flex-col gap-4">
+      <app-custom-button [id]="'id_button_1'" [label]="'Accept'" [type]="'accept'"
+        [icon]="'fa-solid fa-circle-info fa-lg'" [classMain]="'w-full'" [classSpan]="'text-color-primary-dark'" [valid]="true">
+      </app-custom-button>
+
+      <app-custom-button [id]="'id_button-_2'" [label]="'Cancel'" [type]="'cancel'"
+        [icon]="'fa-solid fa-circle-info fa-lg'" [classMain]="'w-full'" [classSpan]="'text-color-primary-dark'" [valid]="false">
+      </app-custom-button>
+
+      <app-custom-input [id]="'id_input_1'" [label]="'Input1'" [placeholder]="'placeholder'" [type]="'text'"
+        [autocomplete]="''" [icon]="'fa-solid fa-circle-user fa-lg'" [control]="formBusqueda.controls.busqueda" [classMain]="''" [classSpan]="'text-color-primary-dark'"
+        [classIcon]="''" [classInput]="''"></app-custom-input>
+
+      <app-custom-input [id]="'id_input_2'" [label]="'Input2'" [placeholder]="'placeholder2'" [type]="'password'"
+        [autocomplete]="''" [icon]="'fa-solid fa-circle-user fa-lg'" [control]="formBusqueda.controls.value" [classMain]="''" [classSpan]="'text-color-primary'"
+        [classIcon]="''" [classInput]="''"></app-custom-input>
+
+      <app-custom-drop-down [id]="'id_drop_down_'" [label]="'Ciudad...'" [control]="formBusqueda.controls.selected"
+        [classMain]="''" [data]="data"></app-custom-drop-down>
+
+      <div class="flex gap-4 w-full">
+        <app-custom-status-indicator [status]="1"></app-custom-status-indicator>
+        <app-custom-status-indicator [status]="0"></app-custom-status-indicator>
+      </div>
+
+      <app-custom-title [id]="'id_title_'" [label]="'Programa de'"
+        [classMain]="'w-full text-center uppercase'"></app-custom-title>
+
+      <app-custom-sub-title [id]="'id_sub_title_'" [label]="'Programa de'"
+        [classMain]="'w-full text-center uppercase'"></app-custom-sub-title>
+
+      <app-custom-icon [icon]="'fa-solid fa-ellipsis-vertical fa-lg'"
+        [classMain]="'text-color-primary'"></app-custom-icon>
+    </div>
+
+    <div class="flex flex-col gap-4">
+
+      <app-custom-dot-menu [classMain]="'w-max'" [classIcon]="'text-color-text'" [data]="data"
+        (response)="onResponseDotMenu($event)"></app-custom-dot-menu>
+
+      <app-custom-loading *ngIf="true" [classMain]="'text-color-loading'"></app-custom-loading>
+
+      <app-custom-menu-button [id]="'id_menu_button_'" [label]="'Menu 1'" [icon]="'fa-solid fa-lock fa-lg'" [classMain]="''" [classSpan]="''"
+        [selected]="selected" [link]="''" (click)="onClickMenuButton('Menu 1')"></app-custom-menu-button>
+
+      <app-custom-menu-button [id]="'id_menu_button_2'" [label]="'Menu 2'" [icon]="''" [classMain]="''" [classSpan]="''"
+        [selected]="selected" [link]="''" (click)="onClickMenuButton('Menu 2')"></app-custom-menu-button>
+
+      <app-custom-tab-button [id]="'id_tab_button_1'" [label]="'Tab 1'" [icon]="''" [classMain]="''" [classSpan]="''"
+        [selected]="tabSelected" [link]="''" (click)="onClickTabButton('Tab 1')"></app-custom-tab-button>
+
+        <app-custom-tab-button [id]="'id_tab_button_2'" [label]="'Tab 2'" [icon]="''" [classMain]="''" [classSpan]="''"
+        [selected]="tabSelected" [link]="''" (click)="onClickTabButton('Tab 2')"></app-custom-tab-button>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-circle-user fa-lg"></i>
+        <p>fa-solid fa-circle-user fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-lock fa-lg"></i>
+        <p>fa-solid fa-lock fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-comment-dots fa-lg"></i>
+        <p>fa-solid fa-comment-dots fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-eye fa-lg"></i>
+        <p>fa-solid fa-comment-dots fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-eye-slash fa-lg"></i>
+        <p>fa-solid fa-comment-dots fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+        <p>fa-solid fa-ellipsis-vertical fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-house fa-lg"></i>
+        <p>fa-solid fa-house fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-hand-holding-dollar fa-lg"></i>
+        <p>fa-solid fa-hand-holding-dollar fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-users fa-lg"></i>
+        <p>fa-solid fa-users fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-file-contract fa-lg"></i>
+        <p>fa-solid fa-file-contract fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-screwdriver-wrench fa-lg"></i>
+        <p>fa-solid fa-screwdriver-wrench fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-people-group fa-lg"></i>
+        <p>fa-solid fa-people-group fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-triangle-exclamation fa-lg"></i>
+        <p>fa-solid fa-triangle-exclamation fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-sort-up fa-lg"></i>
+        <p>fa-solid fa-sort-up fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-sort-down fa-lg"></i>
+        <p>fa-solid fa-sort-down fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-up-long fa-lg"></i>
+        <p>fa-solid fa-up-long fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-solid fa-down-long fa-lg"></i>
+        <p>fa-solid fa-down-long fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-regular fa-circle-up fa-lg"></i>
+        <p>fa-regular fa-circle-up fa-lg</p>
+      </div>
+
+      <div class="flex gap-4 items-center">
+        <i class="fa-regular fa-circle-down fa-lg"></i>
+        <p>fa-regular fa-circle-down fa-lg</p>
+      </div>
+
+      
+
+      
+
+
+      
+
+    </div>
+
+  </form>
+</div>

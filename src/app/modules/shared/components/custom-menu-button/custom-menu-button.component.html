@@ -1,0 +1,18 @@
+<div class="w-full flex h-12" [class]="classMain"
+    [ngClass]="selected === label ? _classMainSelected : _classMainNotSelected">
+
+    <div class="w-1 h-12" [ngClass]="selected == label ? _classLineSelected : _classLineNotSelected"></div>
+
+    <a [routerLink]="[link]" class="flex p-2 w-full h-12 items-center justify-center ml-6">
+
+        <div class="flex gap-5 w-full" [ngClass]="selected == label ? _classSpanSelected : _classSpanNotSelected">
+            <span *ngIf="icon !== ''" [class]="classSpan">
+                <i [class]="icon"></i>
+            </span>
+
+            <p class="font-medium w-max text-base grow">
+                {{ label }}
+            </p>
+        </div>
+    </a>
+</div>

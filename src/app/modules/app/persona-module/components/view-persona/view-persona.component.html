@@ -1,0 +1,86 @@
+<div class="w-full h-full flex flex-col lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-4 items-end">
+
+    <!-- CEDULA DE IDENTIDAD -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">CÉDULA DE IDENTIDAD</p>
+        <div class="flex gap-2">
+            <app-custom-input class="w-full" [id]="'id_input_ci'" [label]="''" [placeholder]="'Cédula de Identidad'"
+                [type]="'text'" [autocomplete]="''" [icon]="''" [control]="formPersona.controls.ci" [classMain]="''"
+                [classSpan]="'text-color-primary-dark'" [classIcon]="''" [classInput]="''" [suggestions]="dataSuggestionsCI"
+                (textChange)="onTextChange($event)"
+                (suggestionSelected)="onSuggestionSelected($event)"></app-custom-input>
+
+            <app-custom-drop-down class="w-48" [id]="'id_drop_down_expedido'" [label]="'Expedido...'"
+                [control]="formPersona.controls.exp" [classMain]="''" [data]="dataExp"></app-custom-drop-down>
+        </div>
+    </div>
+
+    <!-- NOMBRES Y APELLIDOS -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">NOMBRES Y APELLIDOS</p>
+        <div class="flex gap-2">
+            <app-custom-input class="w-full" [id]="'id_input_nombres'" [label]="''" [placeholder]="'Nombres'"
+                [type]="'text'" [autocomplete]="''" [icon]="''" [control]="formPersona.controls.nombres"
+                [classMain]="''" [classSpan]="'text-color-primary-dark'" [classIcon]="''"
+                [classInput]="''"></app-custom-input>
+
+            <app-custom-input class="w-full" [id]="'id_input_apellidos'" [label]="''" [placeholder]="'Apellidos'"
+                [type]="'text'" [autocomplete]="''" [icon]="''" [control]="formPersona.controls.apellidos"
+                [classMain]="''" [classSpan]="'text-color-primary-dark'" [classIcon]="''"
+                [classInput]="''"></app-custom-input>
+        </div>
+    </div>
+
+    <!-- CELULAR / TÉLEFONO -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">CELULAR / TÉLEFONO</p>
+        <div class="flex gap-2">
+            <app-custom-drop-down class="w-48" [id]="'id_drop_down_code_cel'" [label]="'Código...'"
+                [control]="formPersona.controls.code" [classMain]="''" [data]="dataCode"></app-custom-drop-down>
+
+            <app-custom-input class="w-full" class="w-full" [id]="'id_input_celular'" [label]="''"
+                [placeholder]="'Celular / Teléfono'" [type]="'text'" [autocomplete]="''" [icon]="''"
+                [control]="formPersona.controls.celular" [classMain]="''" [classSpan]="'text-color-primary-dark'"
+                [classIcon]="''" [classInput]="''"></app-custom-input>
+        </div>
+    </div>
+
+    <!-- FECHA DE NACIMIENTO / NACIONALIDAD -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">FECHA DE NACIMIENTO /
+            NACIONALIDAD</p>
+        <div class="flex gap-2">
+            <app-custom-input class="w-full" [id]="'id_input_fecnac'" [label]="''" [placeholder]="'Fecha de Nacimiento'"
+                [type]="'date'" [autocomplete]="''" [icon]="''" [control]="formPersona.controls.fec_nac"
+                [classMain]="''" [classSpan]="'text-color-primary-dark'" [classIcon]="''"
+                [classInput]="''"></app-custom-input>
+
+            <app-custom-drop-down class="w-full" [id]="'id_drop_down_nacionalidad'" [label]="'Nacionalidad...'"
+                [control]="formPersona.controls.nacionalidad" [classMain]="''"
+                [data]="dataNacionalidad"></app-custom-drop-down>
+        </div>
+    </div>
+
+    <!-- DIRECCION -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">DIRECCIÓN</p>
+        <div class="flex gap-2 w-full">
+            <app-custom-input class="w-full" [id]="'id_input_direccion'" [label]="''" [placeholder]="'Dirección'"
+                [type]="'text'" [autocomplete]="''" [icon]="''" [control]="formPersona.controls.direccion"
+                [classMain]="''" [classSpan]="'text-color-primary-dark'" [classIcon]="''"
+                [classInput]="''"></app-custom-input>
+        </div>
+    </div>
+
+    <!-- DESCRIPCIÓN -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">DESCRIPCIÓN</p>
+        <div class="flex gap-2">
+            <app-custom-input class="w-full" [id]="'id_input_descripcion'" [label]="''" [placeholder]="'Descripción'"
+                [type]="'text'" [autocomplete]="''" [icon]="''" [control]="formPersona.controls.descripcion"
+                [classMain]="''" [classSpan]="'text-color-primary-dark'" [classIcon]="''"
+                [classInput]="''"></app-custom-input>
+        </div>
+    </div>
+
+</div>
