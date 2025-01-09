@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './custom-input.component.html',
   styleUrl: './custom-input.component.css'
 })
-export class CustomInputComponent implements OnInit, OnChanges {
+export class CustomInputComponent implements OnInit {
 
   /** ---------------------------------- Variables de Inicio ---------------------------------- **/
   @Input() id: string = '';
@@ -43,8 +43,6 @@ export class CustomInputComponent implements OnInit, OnChanges {
   /** ---------------------------------------- OnInit ----------------------------------------- **/
   ngOnInit(): void {
     if (this.type === 'password') this.isPassword = true;
-
-    this.updateClasses();
   }
 
   showOrHiddenPassword() {
@@ -84,30 +82,9 @@ export class CustomInputComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void{
-    if (changes['control']) {
-      this.updateClasses();
-    }
-  }
-
   onTextChange(event: Event) {
     const inputValue = (event.target as HTMLInputElement).value;
     this.textChange.emit(inputValue);
-    this.updateClasses();
-  }
-
-  private updateClasses(): void {
-    if (this.control.errors && this.control.touched) {
-      this._classMain = ['border-color-red', 'text-color-red'];
-      this._classLabel = ['text-color-red'];
-      this._classIcon = ['text-color-red'];
-      this._classInput = ['text-color-red'];
-    } else if(this.control.errors && !this.control.touched) {
-      this._classMain = ['border-color-gray', 'text-text-color-gray'];
-      this._classLabel = ['text-color-gray'];
-      this._classIcon = ['text-color-gray'];
-      this._classInput = ['text-color-gray'];
-    }
   }
 
   selectSuggestion(suggestion: string) {

@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { PersonaModule } from "../persona-module/persona.module";
 import { ViewContactoComponent } from './components/view-contacto/view-contacto.component';
+import { ViewOcupacionComponent } from './components/view-ocupacion/view-ocupacion.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ViewContactoComponent } from './components/view-contacto/view-contacto.
     ListaDepositanteComponent,
     ViewDepositanteComponent,
     ViewContactoComponent,
+    ViewOcupacionComponent,
   ],
   imports: [
     CommonModule,

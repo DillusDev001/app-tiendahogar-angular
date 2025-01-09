@@ -1,0 +1,34 @@
+<div class="w-full h-full flex flex-col lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-4 items-end">
+
+    <!-- OCUPACION -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">OCUPACIÓN</p>
+        <div class="flex gap-2">
+            <app-custom-drop-down class="w-full" [id]="'id_drop_down_banco'" [label]="'Ocupación...'"
+                [control]="formOcupacion.controls.ocupacion" [classMain]="''"
+                [data]="dataOcupacion"></app-custom-drop-down>
+        </div>
+    </div>
+
+    <!-- SECTOR -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">SECTOR</p>
+        <div class="flex gap-2">
+            <app-custom-drop-down class="w-full" [id]="'id_drop_down_moneda'" [label]="'Sector...'"
+                [control]="formOcupacion.controls.sector" [classMain]="''"
+                [data]="dataSector"></app-custom-drop-down>
+        </div>
+    </div>
+
+    <!-- NOTA -->
+    <div class="flex flex-col gap-2 w-full">
+        <p class="w-full bg-color-gray text-xs text-color-text p-1 uppercases text-center">NOTA</p>
+        <div class="flex gap-2">
+            <app-custom-input class="w-full" [id]="'id_input_nro_cuenta'" [label]="''" [placeholder]="'Nota'"
+                [type]="'text'" [autocomplete]="''" [icon]="''" [control]="formOcupacion.controls.nota"
+                [classMain]="''" [classSpan]="'text-color-primary-dark'" [classIcon]="''"
+                [classInput]="''"></app-custom-input>
+        </div>
+    </div>
+
+</div>

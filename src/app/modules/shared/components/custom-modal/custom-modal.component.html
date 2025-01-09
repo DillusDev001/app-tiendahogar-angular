@@ -1,0 +1,16 @@
+<div
+    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-80 text-white rounded-lg z-30 w-full h-full">
+    <div class="flex w-full h-full bg-color-gray-lite bg-opacity-40 backdrop-filter backdrop-blur-sm shadow-lg items-center justify-center">
+
+        <div class="flex flex-col gap-4 w-full max-w-md max-h-full bg-color-white shadow-md p-6 rounded-lg items-center">
+            <app-custom-icon [icon]="'fa-solid fa-circle-info fa-2xl'"
+                [classMain]="'text-color-gray'"></app-custom-icon>
+
+            <p>{{ label }}</p>
+
+            <app-custom-button [id]="'id_button_cerrar'" [label]="'Cerrar'" [type]="'cancel'" [icon]="''"
+                [classMain]="'w-full'" [classSpan]="''" [valid]="true">
+            </app-custom-button>
+        </div>
+    </div>
+</div>

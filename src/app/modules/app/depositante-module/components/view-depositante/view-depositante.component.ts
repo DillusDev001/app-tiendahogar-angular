@@ -13,6 +13,11 @@ import { ViewCuentaBancariaComponent } from '../../../persona-module/components/
 import { ViewBeneficiarioComponent } from '../../../persona-module/components/view-beneficiario/view-beneficiario.component';
 import { ResponseEmitter } from '../../../../../common/interfaces/response.interface';
 import { ViewPersonaComponent } from '../../../persona-module/components/view-persona/view-persona.component';
+import { PersonaService } from '../../../../../common/utils/app/persona-module/persona/persona.service';
+import { CuentaBancariaService } from '../../../../../common/utils/app/persona-module/cuenta-bancaria/cuenta-bancaria.service';
+import { BeneficiarioService } from '../../../../../common/utils/app/persona-module/beneficiario/beneficiario.service';
+import { ContactoService } from '../../../../../common/utils/app/depositante-module/contacto/contacto.service';
+import { ApiResult } from '../../../../../common/interfaces/api.interface';
 
 @Component({
   selector: 'app-view-depositante',
@@ -24,7 +29,11 @@ export class ViewDepositanteComponent implements OnInit {
   constructor(
     private router: Router,
     private notificationService: NotificationService,
-    private networkStatusService: NetworkStatusService
+    private networkStatusService: NetworkStatusService,
+    private personaService: PersonaService,
+    private cuentaBancariaService: CuentaBancariaService,
+    private beneficiarioService: BeneficiarioService,
+    private contactoService: ContactoService
   ) {
     if (getLocalDataLogged() != null) {
       this.dataLocalStorage = getLocalDataLogged();
@@ -63,6 +72,7 @@ export class ViewDepositanteComponent implements OnInit {
 
     if (this.isSmallScreen) {
       this.isCollapsedPersona = false;
+      this.isCollapsedOcupacion = true;
       this.isCollapsedCuentaBancaria = true;
       this.isCollapsedBeneficiario = true;
       this.isCollapsedContacto = true;
@@ -119,6 +129,7 @@ export class ViewDepositanteComponent implements OnInit {
   isSmallScreen!: boolean;
 
   isCollapsedPersona!: boolean;
+  isCollapsedOcupacion!: boolean;
   isCollapsedCuentaBancaria!: boolean;
   isCollapsedBeneficiario!: boolean;
   isCollapsedContacto!: boolean;
@@ -133,6 +144,11 @@ export class ViewDepositanteComponent implements OnInit {
   tooglePersona() {
     if (this.isSmallScreen)
       this.isCollapsedPersona = !this.isCollapsedPersona
+  }
+
+  toogleOcupacion() {
+    if (this.isSmallScreen)
+      this.isCollapsedOcupacion = !this.isCollapsedOcupacion
   }
 
   toogleCuentaBancario() {
@@ -160,14 +176,105 @@ export class ViewDepositanteComponent implements OnInit {
   }
 
   onClickAceptar() {
-    if (this.childPersona.childFormValid() && this.childCuentaBancaria.childFormValid() && this.childBeneficiario.childFormValid() && this.childContacto.childFormValid()) {
+    if (this.childPersona.childFormValid() && this.childCuentaBancaria.childFormValid() &&
+      this.childBeneficiario.childFormValid() && this.childContacto.childFormValid()) {
+
       this.isLoading = true;
+
+
     } else {
       this.showNotification('error', 'Complete los campos faltantes.');
     }
   }
 
   /** ----------------------------------- Consultas Sevidor ----------------------------------- **/
+  // ---------------- PERSONA ---------------- //
+  personaFindOne(ci: string): boolean {
+    this.personaService.personaFindOne(ci).subscribe(result => {
+      result as ApiResult;
+
+      return result.boolean
+    });
+    return false;
+  }
+
+  personaCreate(data: any) {
+    this.personaService.personaCreate(data).subscribe(result => {
+      result as ApiResult;
+
+      if (result.boolean) {
+
+      } else {
+
+      }
+    });
+  }
+
+  // ---------------- CUENTA BANCARIA ---------------- //
+  cuentaBancariaFindOne(ci: string): boolean{
+    this.cuentaBancariaService.cuentaBancariaFindOne(ci).subscribe(result => {
+      result as ApiResult;
+
+      return result.boolean
+    });
+    return false;
+  }
+
+  cuentaBancariaCreate(data: any) {
+    this.cuentaBancariaService.cuentaBancariaCreate(data).subscribe(result => {
+      result as ApiResult;
+
+      if (result.boolean) {
+
+      } else {
+
+      }
+    });
+  }
+
+  // ---------------- BENEFICIARIO ---------------- //
+  beneficiarioFindOne(ci: string): boolean{
+    this.beneficiarioService.beneficiarioFindOne(ci).subscribe(result => {
+      result as ApiResult;
+
+      return result.boolean
+    });
+    return false;
+  }
+
+  beneficiarioCreate(data: any) {
+    this.beneficiarioService.beneficiarioCreate(data).subscribe(result => {
+      result as ApiResult;
+
+      if (result.boolean) {
+
+      } else {
+
+      }
+    });
+  }
+
+  // ---------------- CONTACTO ---------------- //
+  contactoFindOne(ci: string): boolean{
+    this.contactoService.contactoFindOne(ci).subscribe(result => {
+      result as ApiResult;
+
+      return result.boolean
+    });
+    return false;
+  }
+
+  contactoCreate(data: any) {
+    this.contactoService.contactoCreate(data).subscribe(result => {
+      result as ApiResult;
+
+      if (result.boolean) {
+
+      } else {
+
+      }
+    });
+  }
 
   /** ---------------------------------- Onclick file import ---------------------------------- **/
 

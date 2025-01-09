@@ -1347,3 +1347,18 @@ export const arrayMoneda = [
         simbolo: '€'
     }
 ]
+
+export const arraySector = [
+    {
+        data: 'Privado',
+        value: 'Privado',
+    },
+    {
+        data: 'Público',
+        value: 'Público',
+    },
+    {
+        data: 'Independiente',
+        value: 'Independiente',
+    },
+]

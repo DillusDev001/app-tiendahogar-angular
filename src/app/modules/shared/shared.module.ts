@@ -17,6 +17,7 @@ import { CustomLoadingComponent } from './components/custom-loading/custom-loadi
 import { CustomTabButtonComponent } from './components/custom-tab-button/custom-tab-button.component';
 import { CustomDotMenuComponent } from './components/custom-dot-menu/custom-dot-menu.component';
 import { CustomIconComponent } from './components/custom-icon/custom-icon.component';
+import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { CustomIconComponent } from './components/custom-icon/custom-icon.compon
     CustomInputComponent,
     CustomLoadingComponent,
     CustomMenuButtonComponent,
+    CustomModalComponent,
     CustomNotificationComponent,
     CustomStatusIndicatorComponent,
     CustomSubTitleComponent,
@@ -53,6 +55,7 @@ import { CustomIconComponent } from './components/custom-icon/custom-icon.compon
     CustomInputComponent,
     CustomLoadingComponent,
     CustomMenuButtonComponent,
+    CustomModalComponent,
     CustomNotificationComponent,
     CustomStatusIndicatorComponent,
     CustomSubTitleComponent,

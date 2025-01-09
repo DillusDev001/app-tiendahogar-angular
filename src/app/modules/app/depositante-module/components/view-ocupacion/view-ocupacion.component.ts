@@ -4,24 +4,28 @@ import { NotificationService } from '../../../../../common/services/notification
 import { NetworkStatusService } from '../../../../../common/services/network-status.service';
 import { deleteLocalStorageData, getLocalDataLogged, localStorageLogOut } from '../../../../../common/utils/storage.utils';
 import { decodeJWT, decodeJWTUsuario, isTokenExpired } from '../../../../../common/utils/jwt.utils';
-import { goLogin } from '../../../../../common/utils/app/usuario-module/auth/auth.route';
 import { Usuario } from '../../../../../common/utils/app/usuario-module/usuario/usuario.interface';
+import { goLogin } from '../../../../../common/utils/app/usuario-module/auth/auth.route';
 import { DataLocalStorage } from '../../../../../common/interfaces/storage.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { arrayBanco, arrayMoneda, arrayTipoCuenta } from '../../../../../common/utils/local/arrays/common.array';
-import { CuentaBancaria } from '../../../../../common/utils/app/persona-module/cuenta-bancaria/cuenta-bancaria.interface';
+import { usuarioArrayBusqueda } from '../../../../../common/utils/app/usuario-module/usuario/usuario.array';
+import { RiesgoService } from '../../../../../common/utils/app/riesgo-module/riesgo.service';
+import { ApiResult } from '../../../../../common/interfaces/api.interface';
+import { Riesgo } from '../../../../../common/utils/app/riesgo-module/riesgo.interface';
+import { arraySector } from '../../../../../common/utils/local/arrays/common.array';
 
 @Component({
-  selector: 'app-view-cuenta-bancaria',
-  templateUrl: './view-cuenta-bancaria.component.html',
-  styleUrl: './view-cuenta-bancaria.component.css'
+  selector: 'app-view-ocupacion',
+  templateUrl: './view-ocupacion.component.html',
+  styleUrl: './view-ocupacion.component.css'
 })
-export class ViewCuentaBancariaComponent implements OnInit {
+export class ViewOcupacionComponent implements OnInit {
   /** -------------------------------------- Constructor -------------------------------------- **/
   constructor(
     private router: Router,
     private notificationService: NotificationService,
-    private networkStatusService: NetworkStatusService
+    private networkStatusService: NetworkStatusService,
+    private riesgoService: RiesgoService
   ) {
     if (getLocalDataLogged() != null) {
       this.dataLocalStorage = getLocalDataLogged();
@@ -30,6 +34,9 @@ export class ViewCuentaBancariaComponent implements OnInit {
         if (decodedToken != null) {
           if (!isTokenExpired(decodedToken)) {
             this.userLogeado = decodeJWTUsuario(this.dataLocalStorage.tokken) as Usuario
+
+            this.riesgoFindAll()
+
           } else {
             this.showNotification('error', 'Su sesión a expirado, inicie sesión nuevamente.')
             localStorageLogOut();
@@ -55,21 +62,6 @@ export class ViewCuentaBancariaComponent implements OnInit {
     this.networkStatusService.isOnline$.subscribe(status => {
       this.isOnline = status;
     });
-
-    switch (this.type) {
-      case 'nuevo':
-
-        break;
-
-      case 'editar':
-        break;
-
-      case 'ver':
-        this.formCuentaBancaria.disable();
-        break;
-    }
-
-
   }
 
   /** ---------------------------------- Variables de Inicio ---------------------------------- **/
@@ -94,50 +86,49 @@ export class ViewCuentaBancariaComponent implements OnInit {
 
   @Output() response = new EventEmitter<any>();
 
-  formCuentaBancaria = new FormGroup({
-    banco: new FormControl('', [Validators.required]),
-    nro_cuenta: new FormControl('', [Validators.required]),
-    moneda: new FormControl('Bolivianos', [Validators.required]),
-    tipo_cuenta: new FormControl('Caja de Ahorros', [Validators.required]),
+  // para devolver el CI a View-Depositante cuando se encuentre
+  @Output() responseCI = new EventEmitter<any>();
+
+  formOcupacion = new FormGroup({
+    ocupacion: new FormControl('', [Validators.required]),
+    sector: new FormControl('', [Validators.required]),
+    nota: new FormControl('', []),
     fec_mod: new FormControl('', []),
     user_mod: new FormControl('', []),
   });
 
-  dataBanco = arrayBanco;
-  dataModena = arrayMoneda
-  dataTipoCuenta = arrayTipoCuenta;
+
+  dataOcupacion: any[] = [];
+  dataSector = arraySector;
 
   /** ---------------------------------------- Methods ---------------------------------------- **/
 
   /** ------------------------------------ Methods onClick ------------------------------------ **/
 
   /** ----------------------------------- Consultas Sevidor ----------------------------------- **/
+  riesgoFindAll() {
+    this.riesgoService.riesgoFindAll('ocupacion', 'ASC').subscribe(result => {
+      result as ApiResult;
+
+      if (result.boolean) {
+        const dataResult = result.data as Riesgo[];
+
+        dataResult.forEach(item => {
+          this.dataOcupacion.push({
+            value: item.ocupacion,
+            data: item.ocupacion
+          })
+        });
+
+      } else {
+        this.showNotification('error', 'Error al cargar los datos de la ocupación.');
+      }
+    });
+  }
 
   /** ---------------------------------- Onclick file import ---------------------------------- **/
 
   /** ---------------------------------------- Receiver --------------------------------------- **/
-
-  /** ---------------------------------------- Child Emiter --------------------------------------- **/
-  childFormValid(): boolean {
-    return this.formCuentaBancaria.valid;
-  }
-
-  childCuentaBancariaEmmit(): CuentaBancaria {
-    const data = {
-      ci: this.ci,
-      banco: this.formCuentaBancaria.value.banco,
-      nro_cuenta: this.formCuentaBancaria.value.nro_cuenta,
-      moneda: this.formCuentaBancaria.value.moneda,
-      tipo_cuenta: this.formCuentaBancaria.value.tipo_cuenta,
-      user_mod: this.userLogeado.usuario,
-    } as CuentaBancaria;
-
-    return data;
-  }
-
-  childEmiter() {
-    return { ci: this.ci, child: 'Cuenta-Bancaria' };
-  }
 
   /** --------------------------------------- ShowNotification -------------------------------------- **/
   showNotification(type: 'success' | 'error' | 'warning' | 'info', msg: string) {

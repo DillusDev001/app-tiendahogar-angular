@@ -8,6 +8,7 @@ import { Usuario } from '../../../../../common/utils/app/usuario-module/usuario/
 import { goLogin } from '../../../../../common/utils/app/usuario-module/auth/auth.route';
 import { DataLocalStorage } from '../../../../../common/interfaces/storage.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Beneficiario } from '../../../../../common/utils/app/persona-module/beneficiario/beneficiario.interface';
 
 @Component({
   selector: 'app-view-beneficiario',
@@ -94,6 +95,8 @@ export class ViewBeneficiarioComponent implements OnInit {
     nombre_beneficiario: new FormControl('', [Validators.required]),
     celular_beneficiario: new FormControl('', [Validators.required]),
     ci_beneficiario: new FormControl('', [Validators.required]),
+    fec_mod: new FormControl('', []),
+    user_mod: new FormControl('', []),
   });
 
   //dataBusquedaUsuario = usuarioArrayBusqueda;
@@ -109,8 +112,20 @@ export class ViewBeneficiarioComponent implements OnInit {
   /** ---------------------------------------- Receiver --------------------------------------- **/
 
   /** ---------------------------------------- Child Emiter --------------------------------------- **/
-  childFormValid(): boolean{
+  childFormValid(): boolean {
     return this.formBeneficiario.valid;
+  }
+
+  childBeneficiarioEmmit(): Beneficiario {
+    const data = {
+      ci: this.ci,
+      nombre_beneficiario: this.formBeneficiario.value.nombre_beneficiario,
+      celular_beneficiario: this.formBeneficiario.value.celular_beneficiario,
+      ci_beneficiario: this.formBeneficiario.value.ci_beneficiario,
+      user_mod: this.userLogeado.usuario,
+    } as Beneficiario;
+
+    return data;
   }
 
   childEmiter() {

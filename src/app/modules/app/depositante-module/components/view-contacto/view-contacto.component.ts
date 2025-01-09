@@ -8,6 +8,7 @@ import { Usuario } from '../../../../../common/utils/app/usuario-module/usuario/
 import { goLogin } from '../../../../../common/utils/app/usuario-module/auth/auth.route';
 import { DataLocalStorage } from '../../../../../common/interfaces/storage.interface';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Contacto } from '../../../../../common/utils/app/depositante-module/contacto/contacto.interface';
 
 @Component({
   selector: 'app-view-contacto',
@@ -92,6 +93,8 @@ export class ViewContactoComponent implements OnInit {
   formContacto = new FormGroup({
     nombre_contacto: new FormControl('', [Validators.required]),
     celular_contacto: new FormControl('', [Validators.required]),
+    fec_mod: new FormControl('', []),
+    user_mod: new FormControl('', []),
   });
 
   //dataBusquedaUsuario = usuarioArrayBusqueda;
@@ -107,8 +110,19 @@ export class ViewContactoComponent implements OnInit {
   /** ---------------------------------------- Receiver --------------------------------------- **/
 
   /** ---------------------------------------- Child Emiter --------------------------------------- **/
-  childFormValid(): boolean{
+  childFormValid(): boolean {
     return this.formContacto.valid;
+  }
+
+  childContactoEmmit(): Contacto {
+    const data = {
+      ci: this.ci,
+      nombre_contacto: this.formContacto.value.nombre_contacto,
+      celular_contacto: this.formContacto.value.celular_contacto,
+      user_mod: this.userLogeado.usuario,
+    } as Contacto;
+
+    return data;
   }
 
   childEmiter() {

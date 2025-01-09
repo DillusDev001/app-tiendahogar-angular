@@ -3,7 +3,9 @@
 
     <app-custom-loading class="w-full h-full" *ngIf="isLoading"></app-custom-loading>
 
-    <div *ngIf="!isLoading" class="flex flex-col shadow-lg overflow-auto gap-4 bg-color-white lg:w-4/5 max-h-full p-4">
+    <div *ngIf="!isLoading" class="relative flex flex-col shadow-lg overflow-auto gap-4 bg-color-white lg:w-4/5 max-h-full p-4">
+        <app-custom-modal [label]="'Ya se encuentra registrado.'"></app-custom-modal>
+
         <app-custom-title [id]="'id_title_'" [label]="titleView"
             [classMain]="'w-full text-center uppercase text-color-text '"></app-custom-title>
 
@@ -11,6 +13,13 @@
             <legend class="px-2 text-lg text-color-text font-medium uppercase" (click)="tooglePersona()">Datos Personales</legend>
             <app-view-persona [type]="type" [ci]="ci" [class.hidden]="isCollapsedPersona && isSmallScreen"
                 [class.block]="!isCollapsedPersona || !isSmallScreen" (responseCI)="onResponseCI($event)"></app-view-persona>
+        </fieldset>
+
+
+        <fieldset class="border border-color-gray rounded-sm p-2 cursor-pointer lg:cursor-default">
+            <legend class="px-2 text-lg text-color-text font-medium uppercase" (click)="toogleOcupacion()">Datos Ocupación</legend>
+            <app-view-ocupacion [type]="type" [ci]="ci" [class.hidden]="isCollapsedOcupacion && isSmallScreen"
+                [class.block]="!isCollapsedOcupacion || !isSmallScreen" (responseCI)="onResponseCI($event)"></app-view-ocupacion>
         </fieldset>
 
 
@@ -42,7 +51,7 @@
         <div class="flex w-full gap-4 justify-center">
             <app-custom-button class="w-60" [id]="'id_button_agregar'" [label]="'Agregar'" [type]="'accept'"
                 [icon]="''" [classMain]="'w-full'" [classSpan]="'text-color-primary-dark'"
-                [valid]="formBusqueda.valid" (click)="onClickAceptar()">
+                [valid]="true" (click)="onClickAceptar()">
             </app-custom-button>
 
             <app-custom-button class="w-60" [id]="'id_button_cancelar'" [label]="'Cancel'" [type]="'cancel'"

@@ -12,6 +12,7 @@ import { DataLocalStorage } from '../../../../../common/interfaces/storage.inter
 import { PersonaService } from '../../../../../common/utils/app/persona-module/persona/persona.service';
 import { Persona } from '../../../../../common/utils/app/persona-module/persona/persona.interface';
 import { ApiResult } from '../../../../../common/interfaces/api.interface';
+import { BeneficiarioService } from '../../../../../common/utils/app/persona-module/beneficiario/beneficiario.service';
 
 @Component({
   selector: 'app-view-persona',
@@ -24,7 +25,8 @@ export class ViewPersonaComponent implements OnInit {
     private router: Router,
     private notificationService: NotificationService,
     private networkStatusService: NetworkStatusService,
-    private personaService: PersonaService
+    private personaService: PersonaService,
+    private beneficiarioService: BeneficiarioService
   ) {
     if (getLocalDataLogged() != null) {
       this.dataLocalStorage = getLocalDataLogged();
@@ -156,7 +158,7 @@ export class ViewPersonaComponent implements OnInit {
   /** ------------------------------------ Methods onClick ------------------------------------ **/
 
   /** ----------------------------------- Consultas Sevidor ----------------------------------- **/
-  public suggestionFindBy(ci: string) {
+  suggestionFindBy(ci: string) {
     this.personaService.personaFindBy('ci', ci, 'ASC').subscribe(result => {
       result as ApiResult;
 
@@ -172,7 +174,7 @@ export class ViewPersonaComponent implements OnInit {
     });
   }
 
-  public personaFindBy(ci: string) {
+  personaFindBy(ci: string) {
     this.personaService.personaFindBy('ci', ci, 'ASC').subscribe(result => {
       result as ApiResult;
 
@@ -187,16 +189,32 @@ export class ViewPersonaComponent implements OnInit {
     });
   }
 
+  beneficiarioFindOne(ci: string) {
+    this.beneficiarioService.beneficiarioFindOne(ci).subscribe(result => {
+      result as ApiResult;
+
+      if (result.boolean) {
+        this.personaExist = true;
+        this.formPersona.controls.descripcion.setValue(result.data[0].descripcion);
+      } else {
+        this.personaExist = false;
+      }
+    });
+  }
+
   /** ---------------------------------- Onclick file import ---------------------------------- **/
 
   /** ---------------------------------------- Receiver --------------------------------------- **/
   onTextChange(value: string) {
-    if (value.length >= 3) { // Realiza la búsqueda si el texto tiene 3 o más caracteres
+    this.ci = value;
+    this.responseCI.emit({ bool: true, data: { ci: this.ci } });
+
+    if (value.length >= 3) {
       this.formPersona.enable();
       this.resetFormPersona(value);
       this.suggestionFindBy(value);
     } else {
-      this.dataSuggestionsCI = []; // Limpia las sugerencias si el texto es muy corto
+      this.dataSuggestionsCI = [];
     }
   }
 
@@ -208,6 +226,8 @@ export class ViewPersonaComponent implements OnInit {
     this.ci = suggestion;
     this.responseCI.emit({ bool: true, data: { ci: suggestion } });
 
+    
+
     this.personaFindBy(suggestion);
     this.setFormDiableSuggestion()
   }
@@ -215,6 +235,24 @@ export class ViewPersonaComponent implements OnInit {
   /** ---------------------------------------- Child Emiter --------------------------------------- **/
   childFormValid(): boolean {
     return this.formPersona.valid;
+  }
+
+  childPersonaEmmit(): Persona {
+    const data = {
+      ci: this.formPersona.value.ci,
+      exp: this.formPersona.value.exp,
+      nombres: this.formPersona.value.nombres,
+      apellidos: this.formPersona.value.apellidos,
+      code: this.formPersona.value.code,
+      celular: this.formPersona.value.celular,
+      nacionalidad: this.formPersona.value.nacionalidad,
+      fec_nac: this.formPersona.value.fec_nac,
+      direccion: this.formPersona.value.direccion,
+      descripcion: this.formPersona.value.descripcion,
+      user_mod: this.userLogeado.usuario,
+    } as Persona;
+
+    return data;
   }
 
   childEmiterGetCI(): string {
